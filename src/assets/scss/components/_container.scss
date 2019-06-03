@@ -1,0 +1,8 @@
+%container {
+    @include rem(max-width, 1170px);
+    width:100%;
+    &-margin {
+        @include rem(margin-bottom, 50px);
+    }
+}
+

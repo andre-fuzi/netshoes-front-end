@@ -1,0 +1,17 @@
+extends ./_layout/_template__base.pug
+
+//- Page Head SEO
+block append seo
+    title Netshoes - Teste
+
+//- Page styles
+block append styles
+    link(rel='stylesheet', href="./../dist/assets/css/netshoes-home.css")
+
+//- Main Content
+block content
+    section(class="ns-shelf-container")
+
+//- Page scripts
+block append scripts
+    script(type='text/javascript', src='./../dist/assets/js/netshoes-home.js')

@@ -1,0 +1,62 @@
+
+.is--show {
+    @include force-show;
+}
+
+.is--hide {
+    @include force-hide;
+}
+
+.is--mobile {
+    @include mq('sm') {
+        @include force-hide;
+    }
+}
+
+.is--mobile-tablet {
+    @include mq('md') {
+        @include force-hide;
+    }
+}
+
+.is--tablet {
+    @include mq('sm', max) {
+        @include force-hide;
+    }
+
+    @include mq('md') {
+        @include force-hide;
+    }
+}
+
+.is--tablet-desktop {
+    @include mq('sm', max) {
+        @include force-hide;
+    }
+}
+
+.is--desktop {
+    @include mq('md', max) {
+        @include force-hide;
+    }
+}
+
+.hidden-heading {
+    @include hidden-heading;
+}
+
+.visually-hidden {
+    @include visually-hidden;
+}
+
+.visually-shown {
+    @include visually-shown;
+}
+
+.label-hidden {
+    @include visually-hidden;
+
+    .no-placeholder & {
+        @include visually-shown;
+    }
+}

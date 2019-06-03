@@ -1,0 +1,28 @@
+
+block vars
+
+doctype
+html
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="description", content="E-commerce create for Beleaf's Development Test")
+        meta(name="author", content="André Kaoru Fuziyama")
+
+        link(rel="icon", href="./../Netshoes.ico")
+        block seo
+
+        block styles
+            link(rel='stylesheet', href='./../dist/assets/css/netshoes-globals.css', media='all')/
+
+        block headScripts
+
+    body
+        include ./../_partials/minicart/Netshoes-Minicart.pug
+
+        main(role='main', class=`ns-main`)
+            block content
+        
+        block scripts
+            script(type='text/javascript', src='./../dist/assets/js/netshoes-globals.js')
