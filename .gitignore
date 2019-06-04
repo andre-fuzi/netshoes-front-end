@@ -49,6 +49,7 @@ Temporary Items
 
 # Node modules
 node_modules/
+server/node_modules/
 
 # App archives
 *.map
