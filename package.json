@@ -4,10 +4,10 @@
   "author": "Andre Kaoru Fuziyama <andrefuziyama@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "clean": "rm -Rf ./dist",
-    "start": "npm run clean && gulp --colors && gulp watch --colors",
-    "build": "npm run clean && gulp --colors --production",
-    "dev": "npm run build && gulp watch --colors --production"
+    "clean": "rm -Rf ./dist  && rm index.html",
+    "start": "npm run clean && gulp --colors && gulp watch --colors && cp 'html/Netshoes-Home.html' index.html",
+    "build": "npm run clean && gulp --colors --production && cp 'html/Netshoes-Home.html' index.html",
+    "dev": "npm run build && gulp watch --colors --production && cp 'html/Netshoes-Home.html' index.html"
   },
   "devDependencies": {
     "eslint": "^4.19.1",

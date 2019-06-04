@@ -9,11 +9,11 @@ const Methods = {
     },
 
     buildShelfs() {
-        const productsList = Methods._productList("https://raw.githubusercontent.com/netshoes/front-end-recruitment/master/public/data/products.json", "FETCH_PRODUCT_DONE");
+        const productsList = Methods._productList("https://akf-netshoes-front-end.herokuapp.com/api/products", "FETCH_PRODUCT_DONE");
 
         document.addEventListener("FETCH_PRODUCT_DONE", (ev)=> {
             console.log(productsList);
-
+            Methods._createShelfProduct(productsList,"ns-shelf-container__list")
         });
 
     },
@@ -22,26 +22,32 @@ const Methods = {
         const container = Methods._createElementWithClass('ul', className),
              itemClass = className.slice(0, className.indexOf(" ")) + "__item";
 
+        El.shelf.container.insertAdjacentElement('afterbegin', container);
+
         list.map(el => {
             
             const item = Methods._createElementWithClass('li', itemClass);
 
             (!el.imageUrl) ? el.loader = ' ns-shelf__img-loader' : el.loader = ''
-            item.innerHTML =    `<a class="ns-shelf__link${el.loader}" href="#"><img class="ns-shelf__img" src="${el.imageUrl}" alt="${el.name}"></a>
-                                <div class="ns-shelf__content">
-                                    <h3 class="ns-shelf__title">${el.name}</h3>
-                                    <span class="ns-shelf__price-old">De: R$ ${el.priceFrom.toFixed(2)}</span>
-                                    <p class="ns-shelf__price-best">Por: <span>R$ ${el.price.toFixed(2)}</span></p>
-                                    <p class="ns-shelf__price-installments">Ou até 10x de R$ ${(el.price/10).toFixed(2)}</p>
-                                </div>
+            item.innerHTML =    `<a class="ns-shelf__link${el.loader}" href="#"><img class="ns-shelf__img" src="./dist/assets/images/${el.image}" alt="${el.name}"></a>
                                 <div class="ns-shelf__actions">
-                                    <input class="ns-shelf__installments" type="number" value="1" min="1" max="10">
-                                    <a class="ns-shelf__cep" href="#">Consultar CEP</a>
-                                </div>`
+                                    <div class="ns-shelf__actions--size">
+                                        
+                                    </div>
+                                    <div class="ns-shelf__actions--quant">
+                                        <button class="ns-shelf__qty--minus" data-qty-selector="-">-</button>
+                                        <input class="ns-shelf__qty" type="text" value="1" min="1">
+                                        <button class="ns-shelf__qty--plus" data-qty-selector="+">+</button>
+                                    </div>
+                                </div>
+                                <div class="ns-shelf__content">
+                                    <h3 class="ns-shelf__title">${el.title} ${el.description}</h3>
+                                    <p class="ns-shelf__price-best">R$<span>${Math.floor(el.price)}</span>${el.price.toFixed(2).toString().replace(/\d+\./g,',')}</p>
+                                    ${(el.installments) ? `<p class="ns-shelf__price-installments">Ou ${el.installments}x de R$ ${(el.price/el.installments).toFixed(2).replace(/\./gi,',')}</p>` : ''}
+                                </div>
+                                `
             container.insertAdjacentElement('beforeend',item);
         });
-
-        return container;
     },
 
     _productList(url, event) {
@@ -52,7 +58,7 @@ const Methods = {
         fetch(_url)
             .then((response) => response.json())
             .then((result) => {
-                ProductList.push(...result.products);
+                ProductList.push(...result);
                 Methods._sendCustomEvent(_event);
             })
             .catch(err => console.log(err));
