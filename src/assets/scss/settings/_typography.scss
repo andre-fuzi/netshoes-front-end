@@ -2,13 +2,13 @@
 /**
  * Typography
  */
-$font-main   : 'Lato', sans-serif;;
+$font-main   : 'Open Sans', sans-serif;
 
 /**
  * Font Weight
  */
 $weights: (
-    light       : 300,
     normal      : 400,
-    bold        : 700,
+    bold        : 600,
+    strong      : 700,
 );

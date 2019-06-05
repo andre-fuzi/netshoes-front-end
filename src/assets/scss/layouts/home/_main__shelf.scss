@@ -1,0 +1,164 @@
+.ns-shelf {
+
+    &__list {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+    }
+
+    &__item {
+        width: calc(20% - 40px);
+        @include rem(margin, 20px);
+
+        &--content {
+            position: relative;
+        }
+
+        &--actions {
+            overflow: hidden;
+            position: absolute;
+            bottom: 0;
+            left: 2.5%;
+            width: 95%;
+            background: rgba(230, 230, 230, 0.5);
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            @include rem(padding, 10px);
+            max-height: 0;
+            opacity: 0;
+            visibility: hidden;
+            will-change: max-height;
+            transition: all .3s ease-in-out;
+
+            &.is--active{
+                max-height: 300px;
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        &--flag {
+            position: absolute;
+            @include rem(top, 10px);
+            @include rem(right, 15px);
+            @include rem(width, 40px);
+            @include rem(height, 40px);
+            border-radius: 50%;
+            background: $color-yellow;
+            color: $color-black;
+            font-weight: bold;
+            text-align: center;
+            @include rem(font-size, 9px);
+            @extend %display-column-centered;
+        }
+
+        &:hover {
+            .ns-shelf__item--actions {
+                max-height: 300px;
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    &__link {
+        display: block;
+        width: 95%;
+        margin: auto;
+    }
+
+    &__title {
+        text-align: center;
+        color: $color-gray;
+        font-weight: 600;
+        @include rem(font-size, 18px);
+        @include rem(margin-top, 20px);
+
+        &:after {
+            content:'';
+            display: block;
+            @include rem(margin, 10px auto);
+            @include rem(width, 25px);
+            @include rem(height, 3px);
+            background: $color-yellow;
+        }
+    }
+
+    &__price-best {
+        @include rem(font-size, 14px);
+        color: $color-gray;
+        text-align: center;
+
+        span {
+            @include rem(font-size, 32px);
+            font-weight: bold;
+        }
+    }
+
+    &__price-installments {
+        text-align: center;
+        color: $color-gray-light;
+    }
+
+    &__size {
+        @extend %display-row-centered;
+        width: 100%;
+        @include rem(padding, 10px);
+
+        &--btn {
+            display: block;
+            background: $color-white;
+            @include rem(min-width, 30px);
+            @include rem(min-height, 30px);
+            @include rem(margin, 0 5px);
+            @include rem(padding, 2px);
+            @include rem(border-radius, 26px);
+            border: 1px solid $color-gray-light;
+            color: $color-gray-dark;
+            text-align: center;
+            @include rem(font-size, 14px);
+            @include rem(line-height, 24px);
+            transition: all .2s ease-in-out;
+
+            &:hover, &.is--active {
+                color: $color-blue;
+                border: 1px solid $color-blue;
+            }
+
+            &.is--active {
+                font-weight: 600;
+            }
+
+        }
+    }
+
+    &__qty {
+        @extend %display-row;
+
+        &--value {
+            @include rem(width, 30px);
+            text-align: center;
+            background: $color-white;
+        }
+
+        &--operator {
+            @include rem(width, 20px);
+            text-align: center;
+            background: $color-purple;
+            color: $color-white;
+        }
+    }
+
+    &__buy-btn {
+        @include rem(padding, 5px 15px);
+        background: $color-blue;
+        color: $color-white;
+        transition: background .2s ease-in-out;
+        font-weight: 600;
+
+        &:hover {
+            background: $color-blue-dark;
+        }
+    }
+}

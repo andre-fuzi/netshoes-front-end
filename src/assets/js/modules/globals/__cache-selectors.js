@@ -1,7 +1,4 @@
 export default {
-    shelf: {
-        container: document.querySelector('.ns-shelf-container'),
-        
-    },
     main: document.querySelector('.ns-main'),
+    ajaxLoader: document.querySelector('.ns-ajax-loader'),
 }

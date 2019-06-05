@@ -1,7 +1,7 @@
-import ProductsShelf from './_main-shelf.js';
+import GlobalMethods from './_globals-methods.js';
 
 const init = () => {
-    ProductsShelf.init();
+    GlobalMethods.init();
 }
 
 export default {
