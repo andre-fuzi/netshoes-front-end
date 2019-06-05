@@ -13,12 +13,29 @@ const Methods = {
 
         document.addEventListener("FETCH_PRODUCT_DONE", (ev)=> {
             console.log(productsList);
-            Methods._createShelfProduct(productsList,"ns-shelf__list")
+            Methods._createShelfProducts(productsList,"ns-shelf__list");
+
+            const sizeBtns = document.querySelectorAll('.ns-shelf__size--btn');
+            [...sizeBtns].map((el) => {
+                el.addEventListener('click', (ev) => {
+                    [...ev.currentTarget.parentElement.children].map((el) => el.classList.remove('is--active'));
+                    ev.currentTarget.classList.add('is--active');
+                })
+            })
+
+            const qtyBtn = document.querySelectorAll('.ns-shelf__qty--operator');
+            [...qtyBtn].map((el) => {
+                el.addEventListener('click', (ev) => {
+                    const operator = ev.currentTarget.dataset.qtyOperator;
+
+                    
+                })
+            });
         });
 
     },
 
-    _createShelfProduct(list, className) {
+    _createShelfProducts(list, className) {
         const container = netshoes.createElementWithClass('ul', className)
         El.shelf.container.insertAdjacentElement('afterbegin', container);
 
