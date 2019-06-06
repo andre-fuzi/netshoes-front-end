@@ -1,23 +1,38 @@
-# Netshoes Cart Test
+# Netshoes Challenge
 
-## Expected result
+## Installation
 
-* See a list of products;
-* Be able to add or remove items to the cart and get instant visual feedback;
-* See the products added to the cart.
+Clone the repository
 
-## Data
+Use the command bellow to install dependencies 
 
-The data we provide is a static JSON file under `/public/data`.
+```bash
+npm install
+```
 
-## Notes
+## For Debugging
 
-* You can use whatever stack or tooling you want to help you;
-* Feel free to ask us questions during the process (but trust your guts, please!);
-* You should create a static server in order to access the JSON data provided.
+After installing the packages, run the command bellow for debugging proposes on DevTools (not minified)
 
-## Bonus
+```bash
+npm start
+```
 
+## Static Server
+
+Server deployed on Heroku
+
+* Getting all products
+
+`https://akf-netshoes-front-end.herokuapp.com/api/products`
+
+
+* Getting a specific product
+
+`https://akf-netshoes-front-end.herokuapp.com/api/product/"ProductSKU"` 
+
+
+## Features
+* Github pages
 * Persist data on page reload;
-* Test your code;
 * Instructions on how to build/run the project.
