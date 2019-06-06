@@ -10,13 +10,14 @@ Use the command bellow to install dependencies
 npm install
 ```
 
-## For Debugging
+## Code Inspection
 
-After installing the packages, run the command bellow for debugging proposes on DevTools (not minified)
+After installing the packages, run the command bellow for inspection proposes on DevTools (not minified code)
 
 ```bash
 npm start
 ```
+And open index.html file
 
 ## Static Server
 
@@ -32,7 +33,15 @@ Server deployed on Heroku
 `https://akf-netshoes-front-end.herokuapp.com/api/product/"ProductSKU"` 
 
 
+If you want to test the server in localhost, open the folder server, and run the command on terminal.
+
+```bash
+npm start
+```
+The server is listenning to port 3001.
+
 ## Features
 * Github pages
-* Persist data on page reload;
+* Responsive layout
+* Persist minicart data on page reload;
 * Instructions on how to build/run the project.

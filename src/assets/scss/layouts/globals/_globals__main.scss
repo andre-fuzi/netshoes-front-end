@@ -27,6 +27,29 @@
             font-weight: bold;
         }
     }
+
+    @include mq('sm', max) {
+        @include rem(padding, 10px);
+
+        &__logo {
+            @include rem(width, 120px);
+            @include rem(height, calc((720 / 1280) * 120px));
+        }
+
+        &__cart {
+            justify-content: space-around;
+            align-items: center;
+            @include rem(width, 60px);
+            @include rem(padding, 10px);
+
+            &--logo {
+                @include rem(width, 30px);
+            }
+            &--text {
+                display: none;
+            }
+        }
+    }
 }
 
 .ns-ajax-loader {

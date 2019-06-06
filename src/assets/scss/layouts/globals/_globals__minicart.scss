@@ -43,6 +43,10 @@
         &:hover {
             color: $color-yellow;
         }
+
+        @include mq('sm', max) {
+            @include rem(font-size, 10px);
+        }
     }
 
     &__container {
@@ -59,6 +63,10 @@
         background: $color-gray-dark;
         transform: translateX(200%);
         transition: all .3s ease-in-out;
+
+        @include mq('sm', max) {
+            width: 90%;
+        }
     }
 
     &__top {
@@ -92,6 +100,27 @@
             color: $color-white;
             text-transform: uppercase;
             font-weight: bold;
+        }
+
+        @include mq('sm', max) {
+            &--icon {
+                img {
+                    @include rem(width, 25px);
+                }
+            }
+    
+            &--total {
+                @include rem(bottom, -5px);
+                @include rem(right, -5px);
+                @include rem(width, 15px);
+                @include rem(height, 15px);
+                @include rem(font-size, 10px);
+                @include rem(line-height, 15px);
+            }
+    
+            &--title {
+                @include rem(margin-left, 18px);
+            }
         }
     }
 
@@ -162,6 +191,7 @@
             @include rem(font-size, 16px);
             font-weight: bold;
             align-self: flex-end;
+            white-space: nowrap;
         }
 
         &--delete {
@@ -192,6 +222,32 @@
                 color:  $color-gray;
             }
         }
+
+        @include mq('sm', max) {
+
+            @include rem(padding, 5px 5%);
+
+            &--img {
+                @include rem(width, 50px);
+            }
+    
+            &--title {
+                @include rem(font-size, 12px);
+            }
+    
+            &--details, &--qty {
+                @include rem(font-size, 10px);
+            }
+    
+            &--value {
+                @include rem(font-size, 12px);
+            }
+    
+            &--delete {
+                @include rem(font-size, 14px);
+            }
+    
+        }
     }
 
     &__subtotal {
@@ -211,6 +267,16 @@
         &--value {
             color: $color-yellow;
             @include rem(font-size, 26px);
+        }
+
+        @include mq('sm', max) {
+            &--text {
+                @include rem(font-size, 12px);
+            }
+    
+            &--value {
+                @include rem(font-size, 22px);
+            }
         }
     }
 

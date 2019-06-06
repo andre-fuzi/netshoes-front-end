@@ -61,6 +61,26 @@
                 visibility: visible;
             }
         }
+
+        @include mq('lg', max) {
+            width: calc(33% - 40px);
+        }
+
+        @include mq('md', max) {
+            &--actions {
+                position: relative;
+                justify-content: space-between;
+                background: none;
+                padding: 0;
+                max-height: unset;
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        @include mq('sm', max) {
+            width: calc(50% - 40px);
+        }   
     }
 
     &__link {
@@ -88,6 +108,14 @@
             @include rem(height, 3px);
             background: $color-yellow;
         }
+
+        @include mq('md', max) {
+            @include rem(font-size, 15px);
+        }
+
+        @include mq('sm', max) {
+            @include rem(font-size, 12px);
+        }
     }
 
     &__price-best {
@@ -99,11 +127,31 @@
             @include rem(font-size, 32px);
             font-weight: bold;
         }
+
+        @include mq('md', max) {
+            span {
+                @include rem(font-size, 26px);
+            }
+        }
+
+        @include mq('sm', max) {
+            @include rem(font-size, 12px);
+
+            span {
+                @include rem(font-size, 20px);
+            }
+        }
     }
 
     &__price-installments {
         text-align: center;
         color: $color-gray-light;
+        @include mq('md', max) {
+            @include rem(font-size, 14px);
+        }
+        @include mq('sm', max) {
+            @include rem(font-size, 12px);
+        }
     }
 
     &__size {
@@ -136,6 +184,27 @@
             }
 
         }
+
+        @include mq('md', max) {
+            &--btn {
+                @include rem(min-width, 25px);
+                @include rem(min-height, 25px);
+                @include rem(font-size, 11px);
+                @include rem(line-height, 18px);
+            }
+        }
+
+        @include mq('sm', max) {
+
+            @include rem(padding, 10px 0);
+            
+            &--btn {
+                @include rem(min-width, 20px);
+                @include rem(min-height, 20px);
+                @include rem(font-size, 10px);
+                @include rem(line-height, 15px);
+            }
+        }
     }
 
     &__qty {
@@ -153,6 +222,28 @@
             background: $color-purple;
             color: $color-white;
         }
+
+        @include mq('md', max) {
+            &--value {
+                @include rem(width, 25px);
+                @include rem(font-size, 12px);
+                border: 1px solid $color-purple;
+            }
+
+            &--operator {
+                @include rem(font-size, 12px);
+            }
+        }
+
+        @include mq('sm', max) {
+            &--value {
+                @include rem(width, 20px);
+            }
+
+            &--operator {
+                @include rem(font-size, 10px);
+            }
+        }
     }
 
     &__buy-btn {
@@ -164,6 +255,15 @@
 
         &:hover {
             background: $color-blue-dark;
+        }
+
+        @include mq('md', max) {
+            @include rem(font-size, 12px);
+        } 
+
+        @include mq('sm', max) {
+            @include rem(font-size, 10px);
+            @include rem(padding, 5px);
         }
     }
 
@@ -189,6 +289,30 @@
         p {
             @include rem(padding, 20px);
             text-align: center;
+        }
+
+        @include mq('sm', max) {
+            width: 70%;
+            top: 40%;
+            left: 15%;
+            @include rem(padding, 20px);
+            height: unset;
+            
+            h4 {
+                @include rem(font-size, 16px);
+                @include rem(margin-bottom, 10px);
+            }
+
+            p {
+                @include rem(font-size, 12px);
+                @include rem(padding, 10px);
+            }
+        }
+
+
+        @include mq('sm', max) {
+            width: 90%;
+            left: 5%;
         }
     }
 }

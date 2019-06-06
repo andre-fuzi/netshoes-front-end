@@ -1,3 +1,7 @@
 .ns-main{
     @include rem(padding, 40px);
+
+    @include mq('sm', max) {
+        @include rem(padding, 5px);
+    }
 }
