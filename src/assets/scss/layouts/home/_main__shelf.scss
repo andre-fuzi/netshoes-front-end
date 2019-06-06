@@ -7,7 +7,7 @@
     }
 
     &__item {
-        width: calc(20% - 40px);
+        width: calc(25% - 40px);
         @include rem(margin, 20px);
 
         &--content {
@@ -25,6 +25,7 @@
             flex-flow: row wrap;
             justify-content: space-around;
             @include rem(padding, 10px);
+            @include rem(max-width, 520px);
             max-height: 0;
             opacity: 0;
             visibility: hidden;
@@ -65,10 +66,14 @@
     &__link {
         display: block;
         width: 95%;
+        @include rem(max-width, 520px);
         margin: auto;
     }
 
     &__title {
+        @extend %display-column;
+        justify-content: space-between;
+        @include rem(min-height, 72px);
         text-align: center;
         color: $color-gray;
         font-weight: 600;

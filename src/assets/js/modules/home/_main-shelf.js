@@ -11,26 +11,14 @@ const Methods = {
     buildShelfs() {
         const productsList = Methods._productList("https://akf-netshoes-front-end.herokuapp.com/api/products", "FETCH_PRODUCT_DONE");
 
-        document.addEventListener("FETCH_PRODUCT_DONE", (ev)=> {
+        document.addEventListener("FETCH_PRODUCT_DONE", (ev) => {
             console.log(productsList);
-            Methods._createShelfProducts(productsList,"ns-shelf__list");
+            Methods._createShelfProducts(productsList, "ns-shelf__list");
 
-            const sizeBtns = document.querySelectorAll('.ns-shelf__size--btn');
-            [...sizeBtns].map((el) => {
-                el.addEventListener('click', (ev) => {
-                    [...ev.currentTarget.parentElement.children].map((el) => el.classList.remove('is--active'));
-                    ev.currentTarget.classList.add('is--active');
-                })
-            })
-
-            const qtyBtn = document.querySelectorAll('.ns-shelf__qty--operator');
-            [...qtyBtn].map((el) => {
-                el.addEventListener('click', (ev) => {
-                    const operator = ev.currentTarget.dataset.qtyOperator;
-
-                    
-                })
-            });
+            Methods._selectSize();
+            Methods._addQty();
+            Methods._removeQty();
+            Methods._buy();
         });
 
     },
@@ -40,11 +28,11 @@ const Methods = {
         El.shelf.container.insertAdjacentElement('afterbegin', container);
 
         list.map(el => {
-            
+
             const item = netshoes.createElementWithClass('li', "ns-shelf__item");
 
-            item.innerHTML =    `<div class="ns-shelf__item--content">
-                                    ${(el.isFreeShipping)? `<span class="ns-shelf__item--flag">Frete Grátis</span>`: ""}
+            item.innerHTML = `<div class="ns-shelf__item--content">
+                                    ${(el.isFreeShipping) ? `<span class="ns-shelf__item--flag">Frete Grátis</span>` : ""}
                                     <a class="ns-shelf__link" href=""><img class="ns-shelf__img" src="./dist/assets/images/${el.image}" alt="${el.name}"></a>
                                     <div class="ns-shelf__item--actions" data-sku="${el.sku}" data-price="${el.price}" data-title="${el.title} ${el.description}" data-style="${el.style}" data-image="${el.image}">
                                         <div class="ns-shelf__size">
@@ -60,18 +48,18 @@ const Methods = {
                                 </div>
                                 <div class="ns-shelf__item--info">
                                     <h3 class="ns-shelf__title">${el.title} ${el.description}</h3>
-                                    <p class="ns-shelf__price-best">R$ <span>${Math.floor(el.price)}</span>${el.price.toFixed(2).toString().replace(/\d+\./g,',')}</p>
-                                    ${(el.installments) ? `<p class="ns-shelf__price-installments">Ou ${el.installments}x R$ ${(el.price/el.installments).toFixed(2).replace(/\./gi,',')}</p>` : ''}
+                                    <p class="ns-shelf__price-best">R$ <span>${Math.floor(el.price)}</span>${el.price.toFixed(2).toString().replace(/\d+\./g, ',')}</p>
+                                    ${(el.installments) ? `<p class="ns-shelf__price-installments">Ou ${el.installments}x R$ ${(el.price / el.installments).toFixed(2).replace(/\./gi, ',')}</p>` : ''}
                                 </div>
                                 `
-            container.insertAdjacentElement('beforeend',item);
+            container.insertAdjacentElement('beforeend', item);
         });
     },
 
     _productList(url, event) {
         const ProductList = new Array();
-        const _url = url   
-        const _event = event     
+        const _url = url
+        const _event = event
 
         fetch(_url)
             .then((response) => response.json())
@@ -83,8 +71,50 @@ const Methods = {
 
         return ProductList;
     },
+
+    _selectSize() {
+        const sizeBtns = document.querySelectorAll('.ns-shelf__size--btn');
+        [...sizeBtns].map((el) => {
+            el.addEventListener('click', (ev) => {
+                [...ev.currentTarget.parentElement.children].map((el) => el.classList.remove('is--active'));
+                ev.currentTarget.classList.add('is--active');
+            })
+        })
+    },
+
+    _addQty() {
+        const qtyPlusBtn = document.querySelectorAll('.ns-shelf__qty--operator.is--plus');
+        [...qtyPlusBtn].map((el) => {
+            el.addEventListener('click', (ev) => {
+                const newValue = parseInt(ev.currentTarget.previousElementSibling.value) + 1;
+                ev.currentTarget.previousElementSibling.value = newValue;
+            })
+        });
+    },
+
+    _removeQty() {
+        const qtyMinusBtn = document.querySelectorAll('.ns-shelf__qty--operator.is--minus');
+        [...qtyMinusBtn].map((el) => {
+            el.addEventListener('click', (ev) => {
+                const value = parseInt(ev.currentTarget.nextElementSibling.value);
+                (value > 1) ? ev.currentTarget.nextElementSibling.value = value - 1 : false;
+            })
+        });
+    },
+
+    _buy() {
+        const buyBtn = document.querySelectorAll('.ns-shelf__buy-btn');
+        [...buyBtn].map((el) => {
+            el.addEventListener('click', (ev) => {
+                const product = {};
+                product.sku = ev.currentTarget.parentElement.dataset.sku;
+                product.qty = ev.currentTarget.previousElementSibling.querySelector('input').value;
+                console.log(product);
+            })
+        });
+    }
 }
 
 export default {
-    init:  Methods.init,
+    init: Methods.init,
 }
