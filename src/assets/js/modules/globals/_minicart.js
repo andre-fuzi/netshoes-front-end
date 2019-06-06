@@ -66,10 +66,10 @@ const Methods = {
                 ev.currentTarget.parentElement.classList.add('is--deleted');
                 
                 setTimeout(function() {
+                    item.parentElement.remove();
                     Methods._totalItemsUpdate();
                     Methods._totalValueUpdate();
-                    item.parentElement.remove();
-                },2000);
+                },1000);
             })  
         })
     },
@@ -81,11 +81,10 @@ const Methods = {
     _totalValueUpdate() {
         const currentValue = [...El.minicart.list.children].reduce((value, el, id) => {
             let itemValue = el.dataset.price * el.dataset.qty;
-            console.log("subtotal",value)
-            console.log(itemValue);
             return value += itemValue
         },0);
 
+        console.log(currentValue)
         El.minicart.subtotal.textContent = "R$ " + currentValue.toFixed(2);
     },
 
