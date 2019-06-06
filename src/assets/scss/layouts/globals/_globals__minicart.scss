@@ -24,6 +24,27 @@
         }
     }
 
+    &__close {
+        position: absolute;
+        @include rem(top, 20px);
+        left: 5%;
+        align-self: flex-start;
+        @include rem(font-size, 12px);
+        text-decoration: underline;
+        color: $color-white;
+        cursor: pointer;
+        
+        &:before {
+            content:'X';
+            text-decoration: underline;
+            @include rem(margin-right, 5px);
+        }
+
+        &:hover {
+            color: $color-yellow;
+        }
+    }
+
     &__container {
         @extend %display-column;
         justify-content: space-between;
@@ -75,8 +96,32 @@
     }
 
     &__list {
+        width: 100%;
         height: 65%;
         @include rem(margin, 20px 0);
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+            background-color: $color-gray-lighten;
+            border-radius: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius: 4px;
+            background-color: $color-gray-lighten;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: $color-gray-light;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: $color-yellow; 
+          }
     }
 
     &__item {

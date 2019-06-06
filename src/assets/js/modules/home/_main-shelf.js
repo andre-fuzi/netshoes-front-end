@@ -12,7 +12,6 @@ const Methods = {
         const productsList = Methods._productList("https://akf-netshoes-front-end.herokuapp.com/api/products", "FETCH_PRODUCTSLIST_DONE");
 
         document.addEventListener("FETCH_PRODUCTSLIST_DONE", (ev) => {
-            console.log(productsList);
             Methods._createShelfProducts(productsList, "ns-shelf__list");
 
             Methods._selectSize();
@@ -131,7 +130,7 @@ const Methods = {
 
         setTimeout(function () {
             warnning.remove()
-        }, 2500);
+        }, 2000);
     }
 }
 

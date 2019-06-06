@@ -7,6 +7,7 @@ export default {
         list: document.querySelector('.ns-minicart__list'),
         subtotal: document.querySelector('.ns-minicart__subtotal--value'),
         btn: document.querySelector('.ns-header__cart'),
+        btnClose: document.querySelector('.ns-minicart__close'),
         totalItems: document.querySelector('.ns-minicart__top--total'),
     }
 }

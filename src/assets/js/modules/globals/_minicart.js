@@ -6,6 +6,7 @@ const Methods = {
         netshoes.openCart = Methods._open;
         netshoes.closeCart = Methods._close;
         netshoes.addToCart = Methods._addToCart;
+        Methods._loadStorageData();
         Methods._overlayClick();
         Methods._btnCart();
     },
@@ -25,15 +26,15 @@ const Methods = {
 
                 Methods._totalItemsUpdate();
                 Methods._totalValueUpdate();
-                Methods._removeFromCart();
-                netshoes.openCart();
+                Methods._storageCartData();
+                
                 netshoes.stopAjaxLoader();
+                netshoes.openCart();
             })
     },
 
     _createItem(product) {
         const item = netshoes.createElementWithClass('li','ns-minicart__item');
-
         item.dataset.installments = product.installments;
         item.dataset.sku = product.sku;
         item.dataset.size = product.size;
@@ -50,6 +51,8 @@ const Methods = {
                             <span class="ns-minicart__item--delete">X</span>`
 
         El.minicart.list.insertAdjacentElement('beforeend', item);
+
+        Methods._removeFromCart();
     },
 
     _updateItem(item, qty) {
@@ -63,12 +66,12 @@ const Methods = {
         [...btnDelete].map((el) => {
             el.addEventListener('click', (ev) => {
                 const item = ev.currentTarget;
-                ev.currentTarget.parentElement.classList.add('is--deleted');
-                
+                item.parentElement.classList.add('is--deleted');
                 setTimeout(function() {
                     item.parentElement.remove();
                     Methods._totalItemsUpdate();
                     Methods._totalValueUpdate();
+                    Methods._storageCartData();
                 },1000);
             })  
         })
@@ -84,8 +87,38 @@ const Methods = {
             return value += itemValue
         },0);
 
-        console.log(currentValue)
         El.minicart.subtotal.textContent = "R$ " + currentValue.toFixed(2);
+    },
+
+    _storageCartData() {
+        const currentList = [...El.minicart.list.children].reduce((value, el, id, list) => {
+            let item = `${el.dataset.sku}/${el.dataset.qty}/${el.dataset.size}|`;
+            if( id+1 == list.length) {
+                item = item.replace(/\|/g,"");
+                return value += item;
+            }
+            return value += item;
+        },'');
+
+        window.localStorage.setItem('cartDataStorage',currentList);
+    },
+
+    _loadStorageData() {
+        const storage = window.localStorage.getItem('cartDataStorage');
+
+        if (storage) {
+            const list = storage.split('|');
+            list.map((el) => {
+                const product = {};
+                const item = el.split('/');
+                product.sku = item[0];
+                product.qty = item[1];
+                product.size = item[2];
+                
+                Methods._addToCart(product);
+                Methods._close();
+            })
+        } 
     },
 
     _overlayClick() {
@@ -102,6 +135,7 @@ const Methods = {
 
     _btnCart() {
         El.minicart.btn.addEventListener('click', Methods._open);
+        El.minicart.btnClose.addEventListener('click', Methods._close);
     },
 
     _open() {
