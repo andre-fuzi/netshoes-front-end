@@ -1,6 +1,6 @@
 import CacheSelector from './__cache-selectors.js';
 
-const El = CacheSelector;
+const El = CacheSelector.shelf;
 
 const Methods = {
 
@@ -9,9 +9,9 @@ const Methods = {
     },
 
     buildShelfs() {
-        const productsList = Methods._productList("https://akf-netshoes-front-end.herokuapp.com/api/products", "FETCH_PRODUCT_DONE");
+        const productsList = Methods._productList("https://akf-netshoes-front-end.herokuapp.com/api/products", "FETCH_PRODUCTSLIST_DONE");
 
-        document.addEventListener("FETCH_PRODUCT_DONE", (ev) => {
+        document.addEventListener("FETCH_PRODUCTSLIST_DONE", (ev) => {
             console.log(productsList);
             Methods._createShelfProducts(productsList, "ns-shelf__list");
 
@@ -25,7 +25,7 @@ const Methods = {
 
     _createShelfProducts(list, className) {
         const container = netshoes.createElementWithClass('ul', className)
-        El.shelf.container.insertAdjacentElement('afterbegin', container);
+        El.container.insertAdjacentElement('afterbegin', container);
 
         list.map(el => {
 
@@ -54,9 +54,12 @@ const Methods = {
                                 `
             container.insertAdjacentElement('beforeend', item);
         });
+
+        netshoes.stopAjaxLoader();
     },
 
     _productList(url, event) {
+        netshoes.startAjaxLoader();
         const ProductList = new Array();
         const _url = url
         const _event = event
@@ -107,11 +110,28 @@ const Methods = {
         [...buyBtn].map((el) => {
             el.addEventListener('click', (ev) => {
                 const product = {};
-                product.sku = ev.currentTarget.parentElement.dataset.sku;
+                const parent = ev.currentTarget.parentElement;
+
+                product.sku = parent.dataset.sku;
                 product.qty = ev.currentTarget.previousElementSibling.querySelector('input').value;
-                console.log(product);
+                const sizeValidator = [...parent.firstElementChild.children].find((el) => el.classList.contains('is--active'));
+
+                (sizeValidator) ? product.size = sizeValidator.dataset.size : Methods._noteSelectSize();
+
+                (product.size) ? netshoes.addToCart(product) : false;
             })
         });
+    },
+
+    _noteSelectSize() {
+        const warnning = netshoes.createElementWithClass('div', 'ns-shelf__warnning');
+        warnning.innerHTML = `<h4>Tamanho não selecionado</h4><p>Por favor, selecionar um tamanho para adicionar o produto à sacola.</p>`
+
+        El.container.insertAdjacentElement('beforeend', warnning);
+
+        setTimeout(function () {
+            warnning.remove()
+        }, 2500);
     }
 }
 

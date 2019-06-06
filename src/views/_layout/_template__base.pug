@@ -19,8 +19,8 @@ html
         block headScripts
 
     body
+        include ./../_partials/header/Netshoes-Header.pug
         include ./../_partials/minicart/Netshoes-Minicart.pug
-
         main(role='main', class=`ns-main`)
             block content
         div(class='ns-ajax-loader')
