@@ -34,7 +34,7 @@ const Methods = {
             item.innerHTML = `<div class="ns-shelf__item--content">
                                     ${(el.isFreeShipping) ? `<span class="ns-shelf__item--flag">Frete Grátis</span>` : ""}
                                     <a class="ns-shelf__link" href=""><img class="ns-shelf__img" src="./dist/assets/images/${el.image}" alt="${el.name}"></a>
-                                    <div class="ns-shelf__item--actions" data-sku="${el.sku}" data-price="${el.price}" data-title="${el.title} ${el.description}" data-style="${el.style}" data-image="${el.image}">
+                                    <div class="ns-shelf__item--actions" data-sku="${el.sku}">
                                         <div class="ns-shelf__size">
                                             ${el.availableSizes.map(el => `<a class="ns-shelf__size--btn" data-size="${el}">${el}</a>`).join("")}
                                         </div>

@@ -6,6 +6,7 @@ export default {
         container: document.querySelector('.ns-minicart__container'),
         list: document.querySelector('.ns-minicart__list'),
         subtotal: document.querySelector('.ns-minicart__subtotal--value'),
-        btn: document.querySelector('.ns-header__cart')
+        btn: document.querySelector('.ns-header__cart'),
+        totalItems: document.querySelector('.ns-minicart__top--total'),
     }
 }
