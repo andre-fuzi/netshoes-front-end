@@ -14,7 +14,7 @@
     "eslint-config-google": "^0.9.1",
     "gulp": "^3.9.1",
     "taskerify": "^1.5.4",
-    "underscore": "^1.9.0"
+    "underscore": "^1.12.1"
   },
   "dependencies": {
     "es6-promise": "^4.2.6",
